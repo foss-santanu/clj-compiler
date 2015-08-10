@@ -1,0 +1,66 @@
+buildscript {
+    repositories {
+        mavenCentral()
+        maven { url 'http://clojars.org/repo' }
+    }
+    dependencies {
+        classpath 'clojuresque:clojuresque:1.7.0'
+    }
+}
+
+apply plugin: 'clojure'
+
+
+repositories {
+    mavenCentral()
+    maven { url 'http://clojars.org/repo' }
+}
+
+dependencies {
+    compile "org.clojure:clojure:1.6.0"
+    compile "cider:cider-nrepl:0.8.0"
+    runtime "org.clojure:tools.nrepl:0.2.10"
+}
+
+clojureRepl {
+    port = "7888"
+    handler = "cider.nrepl/cider-nrepl-handler"
+}
+
+task nrepl(type: JavaExec) {
+
+        classpath project.sourceSets.main.clojure.srcDirs,
+                  project.sourceSets.test.clojure.srcDirs,
+                  sourceSets.test.runtimeClasspath,
+                  sourceSets.main.runtimeClasspath
+
+        main = "clojure.main"
+
+        args '--eval', "(ns gradle-nrepl (:require [clojure.tools.nrepl.server :refer (start-server stop-server)] [cider.nrepl :refer (cider-nrepl-handler)]))",
+             '--eval', "(println \"Starting nrepl server on port 7888\")",
+             '--eval', "(def server (start-server :port 7888))"
+}
+
+task repl(type: JavaExec) {
+
+        classpath project.sourceSets.main.clojure.srcDirs,
+                  project.sourceSets.test.clojure.srcDirs,
+                  sourceSets.test.runtimeClasspath,
+                  sourceSets.main.runtimeClasspath
+
+        //println classpath.asPath
+
+        main = "clojure.main"
+
+        standardInput = System.in
+}
+
+task createDirs << {
+    sourceSets*.java.srcDirs*.each { it.mkdirs() }
+    sourceSets*.clojure.srcDirs*.each { it.mkdirs() }
+    // enable this for groovy project
+    //sourceSets*.groovy.srcDirs*.each { it.mkdirs() }
+    sourceSets*.resources.srcDirs*.each { it.mkdirs() }
+    // enable if a java web application
+    //webAppDir.mkdirs()
+}
