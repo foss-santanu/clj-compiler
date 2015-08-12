@@ -1,4 +1,4 @@
-(ns san.lexer.core
+(ns san.lexer.re-lexer
    "Package to build a lexer from a lexer specification.
     Inspired by the tools like flex, JLex, etc."
    (:require [clojure.string :as string]
@@ -6,6 +6,8 @@
 
 ;;; A good example of using Clojure Regex to build a Lexer
 ;;; http://scottmking.ca/2013/01/13/simple-lexical-analysis-in-clojure/
+
+(def ^:private newline-regex #"\r?\n|\r|[\u0085\u2028\u2029]")
 
 (def ^:private standard-actions {
         :ignore nil
@@ -108,7 +110,7 @@
                                            conj {:str-not-matched error-str
                                                  :at-char char-count :at-line line-count})
                                 (update-in [:context :char-count] + (count error-str))
-                                (update-in [:context :line-count] + (count (re-seq #"[\n\r]+"
+                                (update-in [:context :line-count] + (count (re-seq newline-regex
                                                                                    error-str))))
                             lexer)
         ]
@@ -127,7 +129,7 @@
                             (if lexem
                                 (-> lexer
                                     (update-in [:context :char-count] + (count lexem))
-                                    (update-in [:context :line-count] + (count (re-seq #"[\n\r]+"
+                                    (update-in [:context :line-count] + (count (re-seq newline-regex
                                                                                        lexem)))
                                 )
                                 lexer))
