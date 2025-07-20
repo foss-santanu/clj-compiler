@@ -30,12 +30,23 @@ This lexer is part of the [`clj-compiler`](https://github.com/foss-santanu/clj-c
 
 ---
 
-.
+## 📁 Project Structure
+
+```
+clj-compiler/
 ├── src/
-│   └── main/clojure/san/lexer/re_lexer.clj    ; Lexer core implementation
-├── examples/lexers/lexer1.clj                 ; Example usage with test cases
-├── test/                                      ; (Optional) Add test namespace
-├── README.md                                  ; Documentation
+│   └── main/
+│       └── clojure/
+│           └── san/
+│               └── lexer/
+│                   └── re_lexer.clj      ; Core lexer implementation
+├── examples/
+│   └── lexers/
+│       └── lexer1.clj                    ; Example lexer spec and usage
+├── test/                                 ; (Optional) Add tests here
+├── README.md                             ; Project documentation
+├── deps.edn or project.clj               ; Dependency and build configuration
+```
 
 ---
 
