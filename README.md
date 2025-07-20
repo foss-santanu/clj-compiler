@@ -8,6 +8,16 @@ This lexer is part of the [`clj-compiler`](https://github.com/foss-santanu/clj-c
 
 ---
 
+## ✨ Highlights
+
+- ⚙️ Written in idiomatic Clojure using records, protocols, and higher-order functions.
+- 📜 Declarative lexer specification using data structures.
+- 🔎 Uses regular expressions with symbolic expansion (macro-like regexes).
+- 🧪 Fully tested with examples and assertions.
+- 🧩 Easily extendable to support language-specific lexing or REPL-based parsing.
+
+---
+
 ## ✨ Features
 
 - Define lexical grammar declaratively using Clojure maps
@@ -17,6 +27,15 @@ This lexer is part of the [`clj-compiler`](https://github.com/foss-santanu/clj-c
 - Token transformation hooks
 - Skipping/ignoring whitespace or irrelevant tokens
 - Lazy sequence of tokens from string or file
+
+---
+
+.
+├── src/
+│   └── main/clojure/san/lexer/re_lexer.clj    ; Lexer core implementation
+├── examples/lexers/lexer1.clj                 ; Example usage with test cases
+├── test/                                      ; (Optional) Add test namespace
+├── README.md                                  ; Documentation
 
 ---
 
