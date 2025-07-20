@@ -161,7 +161,7 @@ Use the `build-lexer` function to create a lexer from a spec:
 
 ## ⚖️ License
 
-This project is distributed under the MIT License.
+This project is distributed under the GPL-2.0 License.
 
 ---
 
